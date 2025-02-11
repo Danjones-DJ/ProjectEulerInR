@@ -1,0 +1,32 @@
+# Problem 1: Multiples of 3 and 5
+# Find the sum of all multiples of 3 or 5 below a given limit.
+
+# Define a function called multiples_3_5 that takes a single argument, `limit`.
+multiples_3_5 <- function(limit) {
+  # Generate a sequence of multiples of 3 below the given limit.
+  # seq(0, limit-1, by=3) creates a sequence starting at 0, ending just below the limit, incrementing by 3.
+  multiples_3 <- seq(0, limit-1, by=3)
+  
+  # Generate a sequence of multiples of 5 below the given limit.
+  # seq(0, limit-1, by=5) creates a sequence starting at 0, ending just below the limit, incrementing by 5.
+  multiples_5 <- seq(0, limit-1, by=5)
+  
+  # Combine the two sequences of multiples into a single vector.
+  # Use `unique()` to remove any duplicate values (numbers that are multiples of both 3 and 5, e.g., 15, 30, etc.).
+  all_multiples <- unique(c(multiples_3, multiples_5))
+  
+  # Calculate the sum of all unique multiples of 3 or 5.
+  sum_multiples <- sum(all_multiples)
+  
+  # Return the sum as the result of the function.
+  return(sum_multiples)
+}
+
+# Call the function with a limit of 1000 to solve the problem.
+# The problem asks for the sum of all multiples of 3 or 5 below 1000.
+result = multiples_3_5(1000)
+
+# Print the result to the console.
+print(result)
+
+# The expected output (answer) is 233168.
