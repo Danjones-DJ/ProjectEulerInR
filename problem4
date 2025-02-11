@@ -1,0 +1,41 @@
+# Problem 4: Largest Palindrome Product
+# Find the largest palindrome made from the product of two 2-digit numbers.
+
+# Define a function to check if a number is a palindrome.
+palindrome_test <- function(number) {
+  # Convert the number to a string.
+  num_str <- as.character(number)
+  
+  # Reverse the string:
+  # 1. Split the string into individual characters using `strsplit`.
+  # 2. Reverse the order of the characters using `rev`.
+  # 3. Collapse the reversed characters back into a single string using `paste`.
+  num_rev <- paste(rev(strsplit(num_str, "")[[1]], collapse = "")
+  
+  # Compare the original string with the reversed string.
+  # If they are the same, the number is a palindrome.
+  return(num_str == num_rev)
+}
+
+# Initialize a variable to store the largest palindrome found.
+largest_palindrome <- 0
+
+# Iterate through all possible pairs of two 2-digit numbers (10 to 99).
+# The outer loop iterates over the first number (i).
+for(i in 10:99) {
+  # The inner loop iterates over the second number (j), starting from i to avoid redundant calculations.
+  # For example, if i = 10 and j = 20, we don't need to check i = 20 and j = 10 separately.
+  for(j in i:99) {
+    # Calculate the product of the two numbers.
+    product <- i * j
+    
+    # Check if the product is a palindrome and if it is larger than the current largest palindrome.
+    if(palindrome_test(product) && product > largest_palindrome) {
+      # If both conditions are met, update the largest palindrome.
+      largest_palindrome <- product
+    }
+  }
+}
+
+# Print the largest palindrome found.
+print(largest_palindrome)
