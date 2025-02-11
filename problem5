@@ -1,0 +1,53 @@
+# Problem 5: Smallest Multiple
+# Find the smallest positive number that is evenly divisible by all numbers from 1 to 20.
+
+# Define a function to check if a number is prime.
+is_prime <- function(number) {
+  # Handle edge cases: numbers less than 2 are not prime.
+  if (number < 2) {
+    return(FALSE)
+  }
+  # 2 is the only even prime number.
+  if (number == 2) {
+    return(TRUE)
+  }
+  # Any other even number is not prime.
+  if (number %% 2 == 0) {
+    return(FALSE)
+  }
+  
+  # Check divisibility by odd numbers starting from 3 up to the square root of the number.
+  n <- 3
+  while (n <= sqrt(number)) {
+    if (number %% n == 0) {
+      return(FALSE)
+    }
+    n <- n + 2
+  }
+  
+  # If no divisors are found, the number is prime.
+  return(TRUE)
+}
+
+# Find all prime numbers less than or equal to 20.
+primes_20 <- c()
+for (i in 1:20) {
+  if (is_prime(i)) {
+    primes_20 <- c(primes_20, i)
+  }
+}
+print(primes_20)  # Expected output: 2, 3, 5, 7, 11, 13, 17, 19
+
+# Calculate the smallest multiple by multiplying the highest powers of all primes <= 20.
+product <- 1
+for(i in primes_20) {
+  n <- 1
+  # Find the highest power of the prime (i) that is <= 20.
+  while(i**(n) <= 20) {
+    n <- n + 1
+  }
+  n <- n - 1
+  # Multiply the product by the highest power of the prime.
+  product <- product * i**n
+}
+print(product)
