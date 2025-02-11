@@ -1,0 +1,85 @@
+# Problem 2: Even Fibonacci Numbers
+# Find the sum of all even-valued terms in the Fibonacci sequence that do not exceed a given limit.
+
+# Initial setup for testing (this part was incorrect and later restarted).
+first_term <- 1
+second_term <- 2
+
+n <- 1
+n_plus_one <- 2
+ghost <- n + n_plus_one
+counter <- 2
+sum_evens <- 2
+
+# This while loop was testing with a limit of 100 instead of 4 million (incorrect for the problem).
+while(sum_evens <= 100) {
+  ghost <- n + n_plus_one
+  n <- n_plus_one
+  n_plus_one <- ghost
+  
+  if(n %% 2 == 0) {
+    sum_evens <- sum_evens + n
+  }
+}
+
+# Restarting the solution with the correct limit (4 million).
+
+# Reset variables for the Fibonacci sequence.
+n <- 1
+n_plus_one <- 2
+sum_evens <- 0
+
+# Loop through the Fibonacci sequence until the terms exceed 4 million.
+while(n_plus_one <= 4000000) {
+  # Calculate the next Fibonacci term by adding the current term (n) and the next term (n_plus_one).
+  ghost <- n + n_plus_one
+  
+  # Update the current term (n) to the value of the next term (n_plus_one).
+  n <- n_plus_one
+  
+  # Update the next term (n_plus_one) to the newly calculated Fibonacci term (ghost).
+  n_plus_one <- ghost
+  
+  # Check if the current term (n) is even.
+  if(n %% 2 == 0) {
+    # If it is even, add it to the sum of even-valued terms.
+    sum_evens <- sum_evens + n
+  }
+}
+
+# Print the sum of all even-valued Fibonacci terms not exceeding 4 million.
+print(sum_evens)
+
+# This works! But the code is a bit messy, so let's refactor it into a function for better readability and reusability.
+
+# Define a function called sum_evens_fib that takes a single argument, `limit`.
+sum_evens_fib <- function(limit) {
+  # Initialize variables for the Fibonacci sequence.
+  n <- 1
+  n_plus_one <- 2
+  sum_evens <- 0
+  
+  # Loop through the Fibonacci sequence until the terms exceed the given limit.
+  while(n_plus_one <= limit) {
+    # Calculate the next Fibonacci term.
+    ghost <- n + n_plus_one
+    
+    # Update the current term (n) to the value of the next term (n_plus_one).
+    n <- n_plus_one
+    
+    # Update the next term (n_plus_one) to the newly calculated Fibonacci term (ghost).
+    n_plus_one <- ghost
+    
+    # Check if the current term (n) is even.
+    if(n %% 2 == 0) {
+      # If it is even, add it to the sum of even-valued terms.
+      sum_evens <- sum_evens + n
+    }
+  }
+  
+  # Print the sum of all even-valued Fibonacci terms not exceeding the limit.
+  print(sum_evens)
+}
+
+# Call the function with a limit of 1000 to test it.
+sum_evens_fib(1000)
