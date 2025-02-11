@@ -1,0 +1,82 @@
+# Problem 3: Largest Prime Factor
+# Find the largest prime factor of a given number.
+
+# Initialize the number to factorize.
+number <- 13195
+largest_prime_factor <- 1
+n = 3
+iteration <- 0
+
+# First, handle the case where the number is even.
+# Divide the number by 2 repeatedly until it is no longer even.
+# This ensures that all factors of 2 are removed, and the number becomes odd.
+while(number %% 2 == 0) {
+  largest_prime_factor <- 2
+  number <- number / 2
+}
+
+# Now, iterate through odd numbers starting from 3 to find prime factors.
+# We only need to check up to the square root of the number because any factor
+# larger than the square root would have a corresponding factor smaller than the square root.
+while(n <= number**0.5) {
+  # Check if the current odd number (n) is a factor of the number.
+  if(number %% n == 0) {
+    # If it is a factor, update the largest_prime_factor.
+    largest_prime_factor <- n
+    # Divide the number by n to reduce it and continue factoring.
+    number <- number / n
+  }
+  # Move to the next odd number.
+  n <- n + 2 
+  
+  # Exit this 2nd while loop if the number is reduced to a prime number greater than 2.
+  if(number > 2) {
+    largest_prime_factor <- number
+  }
+}
+
+# Print the largest prime factor found.
+print(largest_prime_factor)
+
+# Now, refactor the code into a function for better readability and reusability.
+
+# Define a function called max_prime_factor that takes a single argument, `limit`.
+max_prime_factor <- function(limit) {
+  # Initialize the number to factorize.
+  number <- limit
+  largest_prime_factor <- 1
+  n = 3
+  iteration <- 0
+  
+  # Handle the case where the number is even.
+  # Divide the number by 2 repeatedly until it is no longer even.
+  while(number %% 2 == 0) {
+    largest_prime_factor <- 2
+    number <- number / 2
+  }
+  
+  # Iterate through odd numbers starting from 3 to find prime factors.
+  while(n <= number**0.5) {
+    # Check if the current odd number (n) is a factor of the number.
+    if(number %% n == 0) {
+      # If it is a factor, update the largest_prime_factor.
+      largest_prime_factor <- n
+      # Divide the number by n to reduce it and continue factoring.
+      number <- number / n
+    }
+    # Move to the next odd number.
+    n <- n + 2 
+    
+    # Exit this 2nd while loop if the number is reduced to a prime number greater than 2.
+    if(number > 2) {
+      largest_prime_factor <- number
+    }
+  }
+  # Print the largest prime factor found.
+  print(largest_prime_factor)
+}
+
+# Call the function with the number 600851475143 to solve the problem.
+max_prime_factor(600851475143)
+
+# The expected output (answer) is 6857.
