@@ -1,0 +1,55 @@
+# two approaches because the first one felt off
+
+# Approach 1
+# Problem 6: Sum Square Difference
+# Find the difference between the square of the sum and the sum of the squares of the first `n` natural numbers.
+
+# Define a function to calculate the difference.
+diff_square_sums <- function(limit) {
+  # Initialize variables to store the sum of squares and the sum of numbers.
+  sum_of_squares <- 0
+  sum <- 0
+  
+  # Iterate through all numbers from 1 to the given limit.
+  for(i in 1:limit) {
+    # Calculate the sum of squares by adding the square of each number.
+    sum_of_squares <- sum_of_squares + i**2
+    
+    # Calculate the sum of numbers by adding each number.
+    sum <- sum + i
+  }
+  
+  # Return the difference between the square of the sum and the sum of squares.
+  return(sum**2 - sum_of_squares)
+}
+
+# Test the function with a limit of 10.
+diff_square_sums(10) # Expected output: 2640
+
+# Test the function with a limit of 100.
+diff_square_sums(100) # Expected output: 25164150
+
+# Approach 2
+# Problem 6: Sum Square Difference (Vectorized Approach)
+# R is optimized for vectorized operations, so this approach is more efficient.
+
+# Define a function to calculate the difference using vectorized operations.
+diff_square_sums <- function(limit) {
+  # Create a vector of numbers from 1 to the given limit.
+  numbers <- 1:limit
+  
+  # Calculate the sum of the squares of the numbers.
+  sum_squares <- sum(numbers**2)
+  
+  # Calculate the square of the sum of the numbers.
+  square_of_sum <- (sum(numbers))**2
+  
+  # Return the difference between the square of the sum and the sum of squares.
+  return(square_of_sum - sum_squares)
+}
+
+# Test the function with a limit of 10.
+diff_square_sums(10) # Expected output: 2640
+
+# Test the function with a limit of 100.
+diff_square_sums(100) # Expected output: 25164150
