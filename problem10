@@ -1,0 +1,17 @@
+# Problem 10
+
+Sieve_of_p10 <- function(limit) {
+  
+  is_prime <- rep(TRUE, limit) 
+  is_prime[1] <- FALSE
+  
+  for (i in 1:floor(sqrt(limit))) {
+    if (is_prime[i]) {
+      is_prime[seq(i*i, limit, by=i)] <- FALSE
+    }
+  }
+  primes <- which(is_prime)
+  return(sum(primes))
+}
+
+print(Sieve_of_p10(2000000))
