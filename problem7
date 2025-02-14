@@ -1,0 +1,24 @@
+nth_prime <- function(limit) {
+  # Set up an upper bound for effiency. Using n * log(n) + n*log(log(n)) as recommended upper bound.
+  upper_bound <- ceiling(limit * log(limit) + limit * log(log(limit)))
+  # Set minimum bound just in case
+  if (upper_bound < 10) upper_bound <- 10
+  
+  # Initialise seive with a boolean array
+  is_prime <- rep(TRUE, upper_bound)
+  is_prime[1] <- FALSE
+  
+  # Create Sieve of Eratosthenes Algo
+  for (i in 2:sqrt(upper_bound)) {
+    if (is_prime[i]) {
+      is_prime[seq(i*i, upper_bound, by=i)] <- FALSE
+  
+    }
+  }
+  # Create list of primes
+  primes <- which(is_prime)
+  
+  # Return the nth prime
+  return(primes[limit])
+}
+print(nth_prime(10001)) #104743
