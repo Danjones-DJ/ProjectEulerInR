@@ -1,0 +1,28 @@
+# Problem 12
+
+# Create a function to create triangle numbers
+
+tri_num <- function(n) {
+  return(n*(n+1)/2)
+}
+
+# Create a function to count a numbers divisors
+
+num_divisors <- function(n) {
+  if(n==1) return(1)
+  divisors <- seq_len(sqrt(n))
+  (sum(n%%divisors==0)*2) - (sqrt(n) == floor(sqrt(n)))
+}
+
+# Create a loop to identify first number to exceed 500 divisors.
+
+n <- 1
+while(TRUE) {
+  current_tri <- tri_num(n)
+  divisor_count <- num_divisors(current_tri)
+  if(divisor_count >= 500) {
+    print(current_tri)
+    break
+  }
+  n <- n+1
+}
